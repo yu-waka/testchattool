@@ -1,8 +1,11 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/chat">chat</router-link>
+      <div v-if="this.$store.state.user">
+        <router-link to="/">Home</router-link> |
+        <router-link to="/chat">chat</router-link>|
+        <amplify-sign-out></amplify-sign-out>
+      </div>
     </div>
     <router-view/>
   </div>

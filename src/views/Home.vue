@@ -1,5 +1,14 @@
 <template>
   <div class="home">
-    welcom to testchattool
+    welcom {{getUserName}}
   </div>
 </template>
+<script>
+export default {
+  computed:{
+    getUserName(){
+      return this.$store.getters.getUserName
+    }
+  }
+}
+</script>>

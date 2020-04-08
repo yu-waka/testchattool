@@ -10,6 +10,8 @@
   "dependencies": {
     "aws-amplify": "^3.0.6",
     "aws-amplify-vue": "^2.1.1",
+    "bootstrap": "^4.4.1",
+    "bootstrap-vue": "^2.11.0",
     "core-js": "^3.6.4",
     "element-ui": "^2.13.0",
     "material": "^0.4.3",
