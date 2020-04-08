@@ -1,1 +1,10 @@
-{}
+{
+	"auth": {
+		"testchattool32b5fcc6": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [],
+			"customAuth": false
+		}
+	}
+}
