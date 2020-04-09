@@ -1,6 +1,7 @@
 type chatroom @model
 { 
   id: ID!
-  name: String!
+  name:String!
   description: String
+  owner:String!
 }

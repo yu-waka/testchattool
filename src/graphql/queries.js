@@ -7,6 +7,7 @@ export const getChatroom = /* GraphQL */ `
       id
       name
       description
+      owner
     }
   }
 `;
@@ -21,6 +22,7 @@ export const listChatrooms = /* GraphQL */ `
         id
         name
         description
+        owner
       }
       nextToken
     }

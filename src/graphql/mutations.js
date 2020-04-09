@@ -10,6 +10,7 @@ export const createChatroom = /* GraphQL */ `
       id
       name
       description
+      owner
     }
   }
 `;
@@ -22,6 +23,7 @@ export const updateChatroom = /* GraphQL */ `
       id
       name
       description
+      owner
     }
   }
 `;
@@ -34,6 +36,7 @@ export const deleteChatroom = /* GraphQL */ `
       id
       name
       description
+      owner
     }
   }
 `;
