@@ -1,7 +1,9 @@
 <template>
-    <div>
-        <div class="title">
-            <h2>Amplifyで作るチャットアプリ</h2>
-        </div>
+    <div class="title">
+        <el-row >
+            <el-col :span="18">
+                welcom {{getUserName}}
+            </el-col>
+        </el-row>
     </div>
 </template>

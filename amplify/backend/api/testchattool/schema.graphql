@@ -4,4 +4,14 @@ type chatroom @model
   name:String!
   description: String
   owner:String!
+  messages:[message] @connection(keyName:"byRoom",fields:["id"])
+}
+
+type message @model
+@key(name: "byRoom",fields:["roomId","id"])
+{
+  id: ID!
+  roomId: ID!
+  message: String
+  owner:String!
 }

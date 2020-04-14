@@ -57,6 +57,7 @@ export default {
       .then(rooms => this.rooms =rooms.data.listChatrooms.items)
       .catch(error => this.error = JSON.stringify(error))
     },
+    //サブスクライブ
     subscribe(){
     this.subscription = API.graphql(graphqlOperation(onCreateChatroom))
       .subscribe({
