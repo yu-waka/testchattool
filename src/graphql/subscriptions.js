@@ -8,6 +8,15 @@ export const onCreateChatroom = /* GraphQL */ `
       name
       description
       owner
+      messages {
+        items {
+          id
+          roomId
+          message
+          owner
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -18,6 +27,15 @@ export const onUpdateChatroom = /* GraphQL */ `
       name
       description
       owner
+      messages {
+        items {
+          id
+          roomId
+          message
+          owner
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -27,6 +45,45 @@ export const onDeleteChatroom = /* GraphQL */ `
       id
       name
       description
+      owner
+      messages {
+        items {
+          id
+          roomId
+          message
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onCreateMessage = /* GraphQL */ `
+  subscription OnCreateMessage {
+    onCreateMessage {
+      id
+      roomId
+      message
+      owner
+    }
+  }
+`;
+export const onUpdateMessage = /* GraphQL */ `
+  subscription OnUpdateMessage {
+    onUpdateMessage {
+      id
+      roomId
+      message
+      owner
+    }
+  }
+`;
+export const onDeleteMessage = /* GraphQL */ `
+  subscription OnDeleteMessage {
+    onDeleteMessage {
+      id
+      roomId
+      message
       owner
     }
   }

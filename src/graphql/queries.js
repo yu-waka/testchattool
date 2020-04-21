@@ -8,6 +8,15 @@ export const getChatroom = /* GraphQL */ `
       name
       description
       owner
+      messages {
+        items {
+          id
+          roomId
+          message
+          owner
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -22,6 +31,36 @@ export const listChatrooms = /* GraphQL */ `
         id
         name
         description
+        owner
+        messages {
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const getMessage = /* GraphQL */ `
+  query GetMessage($id: ID!) {
+    getMessage(id: $id) {
+      id
+      roomId
+      message
+      owner
+    }
+  }
+`;
+export const listMessages = /* GraphQL */ `
+  query ListMessages(
+    $filter: ModelmessageFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listMessages(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        roomId
+        message
         owner
       }
       nextToken
