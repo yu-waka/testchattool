@@ -70,10 +70,7 @@ export default {
         this.roomName = value
         this.createRoom()
       }).catch(() => {
-        // this.$message({
-        //     type: 'info',
-        //     message: this.roomName
-        // })
+        //todo エラー時処理
       })
     }
   },

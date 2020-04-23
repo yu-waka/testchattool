@@ -1,6 +1,5 @@
 <template>
   <div class="main-contents">
-    <!-- value is {{ $route.params.id }}  -->
     <div class="message_base">
       <div v-for="message in messages" :key="message.id">
         <div v-bind:class="[ message.owner === getUserName ? 'message' : 'message_opponent' ]">
@@ -11,8 +10,10 @@
         </div>
       </div>
     </div>
-    {{error}}
     <el-input placehoder="メッセージを入力" v-model="message" @keydown.enter.native="sendMessage"></el-input>
+    <div class="error">
+      {{error}}
+    </div>
   </div>
 </template>
 
@@ -25,11 +26,25 @@ import { onCreateMessage } from '../graphql/subscriptions'
 
 export default {
   name:'Chat',
+  //ルート変更の監視
+  //roomIdが切り替わる場合、messageの読み込みを行う
+  beforeRouteUpdate(to,from,next){
+    console.log('beforeRouteUpdate')
+    if(to.path !== from.path){
+      this.messages = []
+      this.roomId = to.params.id
+      this.subscription.unsubscribe()
+      this.fetch()
+      this.subscribe()
+    }
+    next()
+  },
+  //変数定義
   data(){
     return{
       username:'',
       roomId:'',
-      messages:[{id:'0',message:'test',owner:'testuser'}],
+      messages:[],
       message:'',
       subscription: {},
       error: ''
@@ -41,7 +56,9 @@ export default {
     }
   },
   methods:{
+    //メッセージの送信
     sendMessage(){
+      if(event.keyCode !== 13) return
         const param = {
           id: new Date().getTime() + this.$store.getters.getUserName,
           roomId:this.roomId,
@@ -49,11 +66,11 @@ export default {
           owner: this.$store.getters.getUserName
         }
         
-
         API.graphql(graphqlOperation(createMessage,{input:param}))
         .catch(error => this.error = JSON.stringfy(error))
         this.message = ''
     },
+    //メッセージの取得
     fetch(){
       const filter = {
         roomId: {
@@ -65,6 +82,7 @@ export default {
       .then(messages => this.messages = messages.data.listMessages.items.sort((a,b) => a.id > b.id ? 1 : -1))
       .catch(error => this.error = JSON.stringify(error))
     },
+    //サブスクライブ
     subscribe(){
       this.subscription = API.graphql(graphqlOperation(onCreateMessage))
       .subscribe({
@@ -85,8 +103,10 @@ export default {
     this.fetch()
     this.subscribe()
   },
+  //view破棄時、サブスクリプションを開放する
   beforeDestroy(){
-    this.subscription.unsbscribe()
+    console.log('before Destroy')
+    this.subscription.unsubscribe()
   },
   updated: function(){
     this.scrollBottom()
@@ -94,6 +114,4 @@ export default {
 }
 </script>
 
-<style>
-
-</style>
+<style src="../assets/chat.css" />
