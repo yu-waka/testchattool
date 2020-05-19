@@ -22,14 +22,14 @@
 import API, { graphqlOperation } from '@aws-amplify/api'
 import { createMessage } from '../graphql/mutations'
 import { listMessages } from '../graphql/queries'
-import { onCreateMessage } from '../graphql/subscriptions'
+import { onCreateMessageByRoomId } from '../graphql/subscriptions'
 
 export default {
   name:'Chat',
   //ルート変更の監視
   //roomIdが切り替わる場合、messageの読み込みを行う
   beforeRouteUpdate(to,from,next){
-    console.log('beforeRouteUpdate')
+    // console.log('beforeRouteUpdate')
     if(to.path !== from.path){
       this.messages = []
       this.roomId = to.params.id
@@ -59,6 +59,7 @@ export default {
     //メッセージの送信
     sendMessage(){
       if(event.keyCode !== 13) return
+      if(this.messages === "") return
         const param = {
           id: new Date().getTime() + this.$store.getters.getUserName,
           roomId:this.roomId,
@@ -77,20 +78,21 @@ export default {
           eq:this.roomId
         }
       }
-      console.log(filter)
       API.graphql(graphqlOperation(listMessages,{filter:filter,limit:100}))
       .then(messages => this.messages = messages.data.listMessages.items.sort((a,b) => a.id > b.id ? 1 : -1))
       .catch(error => this.error = JSON.stringify(error))
     },
     //サブスクライブ
     subscribe(){
-      this.subscription = API.graphql(graphqlOperation(onCreateMessage))
+      this.subscription = API.graphql(graphqlOperation(onCreateMessageByRoomId,{roomId: this.roomId}))
       .subscribe({
         next: (eventData) => {
-          const message = eventData.value.data.onCreateMessage
+          console.log(eventData)
+          const message = eventData.value.data.onCreateMessageByRoomID
           this.messages.push(message)
         }
       })
+      
     },
     scrollBottom(){
       const container = this.$el.querySelector(".message_base")
@@ -99,13 +101,12 @@ export default {
   },
   async created(){
     this.roomId = this.$route.params.id
-    console.log(this.roomId)
     this.fetch()
     this.subscribe()
   },
   //view破棄時、サブスクリプションを開放する
   beforeDestroy(){
-    console.log('before Destroy')
+    // console.log('before Destroy')
     this.subscription.unsubscribe()
   },
   updated: function(){
