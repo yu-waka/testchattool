@@ -68,6 +68,16 @@ export const onCreateMessage = /* GraphQL */ `
     }
   }
 `;
+export const onCreateMessageByRoomId = /* GraphQL */ `
+  subscription OnCreateMessageByRoomId($roomId: String!) {
+    onCreateMessageByRoomID(roomId: $roomId) {
+      id
+      roomId
+      message
+      owner
+    }
+  }
+`;
 export const onUpdateMessage = /* GraphQL */ `
   subscription OnUpdateMessage {
     onUpdateMessage {
@@ -78,9 +88,29 @@ export const onUpdateMessage = /* GraphQL */ `
     }
   }
 `;
+export const onUpdateMessageByRoomId = /* GraphQL */ `
+  subscription OnUpdateMessageByRoomId($roomId: String!) {
+    onUpdateMessageByRoomID(roomId: $roomId) {
+      id
+      roomId
+      message
+      owner
+    }
+  }
+`;
 export const onDeleteMessage = /* GraphQL */ `
   subscription OnDeleteMessage {
     onDeleteMessage {
+      id
+      roomId
+      message
+      owner
+    }
+  }
+`;
+export const onDeleteMessageByRoomId = /* GraphQL */ `
+  subscription OnDeleteMessageByRoomId($roomId: String!) {
+    onDeleteMessageByRoomID(roomId: $roomId) {
       id
       roomId
       message

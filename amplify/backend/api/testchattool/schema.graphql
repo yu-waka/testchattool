@@ -7,7 +7,12 @@ type chatroom @model
   messages:[message] @connection(keyName:"byRoom",fields:["id"])
 }
 
-type message @model
+type message @model(
+ subscriptions: { 
+   onCreate:["onCreateMessage","onCreateMessageByRoomID(roomId: String!)"],
+   onUpdate:["onUpdateMessage","onUpdateMessageByRoomID(roomId: String!)"],
+   onDelete:["onDeleteMessage","onDeleteMessageByRoomID(roomId: String!)"]
+   })
 @key(name: "byRoom",fields:["roomId","id"])
 {
   id: ID!
