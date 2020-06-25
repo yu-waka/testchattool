@@ -14,9 +14,13 @@ export const onCreateChatroom = /* GraphQL */ `
           roomId
           message
           owner
+          createdAt
+          updatedAt
         }
         nextToken
       }
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -33,9 +37,13 @@ export const onUpdateChatroom = /* GraphQL */ `
           roomId
           message
           owner
+          createdAt
+          updatedAt
         }
         nextToken
       }
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -52,9 +60,13 @@ export const onDeleteChatroom = /* GraphQL */ `
           roomId
           message
           owner
+          createdAt
+          updatedAt
         }
         nextToken
       }
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -65,6 +77,8 @@ export const onCreateMessage = /* GraphQL */ `
       roomId
       message
       owner
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -75,6 +89,8 @@ export const onCreateMessageByRoomId = /* GraphQL */ `
       roomId
       message
       owner
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -85,6 +101,8 @@ export const onUpdateMessage = /* GraphQL */ `
       roomId
       message
       owner
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -95,6 +113,8 @@ export const onUpdateMessageByRoomId = /* GraphQL */ `
       roomId
       message
       owner
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -105,6 +125,8 @@ export const onDeleteMessage = /* GraphQL */ `
       roomId
       message
       owner
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -115,6 +137,8 @@ export const onDeleteMessageByRoomId = /* GraphQL */ `
       roomId
       message
       owner
+      createdAt
+      updatedAt
     }
   }
 `;

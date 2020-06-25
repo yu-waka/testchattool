@@ -14,9 +14,13 @@ export const getChatroom = /* GraphQL */ `
           roomId
           message
           owner
+          createdAt
+          updatedAt
         }
         nextToken
       }
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -35,6 +39,8 @@ export const listChatrooms = /* GraphQL */ `
         messages {
           nextToken
         }
+        createdAt
+        updatedAt
       }
       nextToken
     }
@@ -47,6 +53,8 @@ export const getMessage = /* GraphQL */ `
       roomId
       message
       owner
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -62,6 +70,37 @@ export const listMessages = /* GraphQL */ `
         roomId
         message
         owner
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const querymessagesByRoom = /* GraphQL */ `
+  query QuerymessagesByRoom(
+    $roomId: ID!
+    $id: ModelIDKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelmessageFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    querymessagesByRoom(
+      roomId: $roomId
+      id: $id
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        roomId
+        message
+        owner
+        createdAt
+        updatedAt
       }
       nextToken
     }

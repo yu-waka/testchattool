@@ -17,9 +17,13 @@ export const createChatroom = /* GraphQL */ `
           roomId
           message
           owner
+          createdAt
+          updatedAt
         }
         nextToken
       }
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -39,9 +43,13 @@ export const updateChatroom = /* GraphQL */ `
           roomId
           message
           owner
+          createdAt
+          updatedAt
         }
         nextToken
       }
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -61,9 +69,13 @@ export const deleteChatroom = /* GraphQL */ `
           roomId
           message
           owner
+          createdAt
+          updatedAt
         }
         nextToken
       }
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -77,6 +89,8 @@ export const createMessage = /* GraphQL */ `
       roomId
       message
       owner
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -90,6 +104,8 @@ export const updateMessage = /* GraphQL */ `
       roomId
       message
       owner
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -103,6 +119,8 @@ export const deleteMessage = /* GraphQL */ `
       roomId
       message
       owner
+      createdAt
+      updatedAt
     }
   }
 `;
